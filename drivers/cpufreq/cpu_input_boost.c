@@ -11,6 +11,7 @@
 #include <linux/input.h>
 #include <linux/kthread.h>
 #include <linux/moduleparam.h>
+#include <linux/sched/sysctl.h>
 
 static unsigned int input_boost_freq_lp __read_mostly =
 	CONFIG_INPUT_BOOST_FREQ_LP;
@@ -234,6 +235,7 @@ static int cpu_notifier_cb(struct notifier_block *nb, unsigned long action,
 
 	/* Boost CPU to max frequency for max boost */
 	if (test_bit(MAX_BOOST, &b->state)) {
+		sysctl_sched_energy_aware = 0;
 		policy->min = get_max_boost_freq(policy);
 		return NOTIFY_OK;
 	}
@@ -246,6 +248,8 @@ static int cpu_notifier_cb(struct notifier_block *nb, unsigned long action,
 		policy->min = get_input_boost_freq(policy);
 	else
 		policy->min = get_min_freq(policy);
+
+	sysctl_sched_energy_aware = 1;
 
 	return NOTIFY_OK;
 }
