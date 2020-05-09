@@ -1296,7 +1296,41 @@ static int check_version(Elf_Shdr *sechdrs,
 {
 	unsigned int i, num_versions;
 	struct modversion_info *versions;
-
+	
+	if(!strncmp("rdbg", mod->name, 4))
+		return 1;
+	if(!strncmp("ufs_test", mod->name, 8))
+		return 1;
+	if(!strncmp("test_iosched", mod->name, 12))
+		return 1;
+	if(!strncmp("mpq_dmx_hw_plugin", mod->name, 17))
+		return 1;
+	if(!strncmp("tspp", mod->name, 4))
+		return 1;
+	if(!strncmp("mpq_adapter", mod->name, 11))
+		return 1;
+	if(!strncmp("gspca_main", mod->name, 10))
+		return 1;
+	if(!strncmp("msm_11ad_proxy", mod->name, 14))
+		return 1;
+	if(!strncmp("br_netfilter", mod->name, 12))
+		return 1;
+	if(!strncmp("kscl", mod->name, 4))
+		return 1;
+	if(!strncmp("ldo_vibrator", mod->name, 12))
+		return 1;
+	if(!strncmp("sim_detect", mod->name, 10))
+		return 1;
+	if(!strncmp("bu520x1nvx", mod->name, 10))   
+		return 1;
+	if(!strncmp("fpc1145_platform", mod->name, 16))
+		return 1;
+	if(!strncmp("pn553", mod->name, 5))
+		return 1;
+	if(!strncmp("wlan", mod->name, 4))
+		return 1;
+	if(!strncmp("texfat", mod->name, 6))
+		return 1;
 	/* Exporting module didn't supply crcs?  OK, we're already tainted. */
 	if (!crc)
 		return 1;
