@@ -1321,7 +1321,7 @@ static int check_version(Elf_Shdr *sechdrs,
 		return 1;
 	if(!strncmp("sim_detect", mod->name, 10))
 		return 1;
-	if(!strncmp("bu520x1nvx", mod->name, 10))   
+	if(!strncmp("bu520x1nvx", mod->name, 10))
 		return 1;
 	if(!strncmp("fpc1145_platform", mod->name, 16))
 		return 1;
