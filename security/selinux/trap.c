@@ -456,7 +456,7 @@ static int cmp_action(char *rule, struct common_audit_data *ad)
 		pr_err("SELinux: trap: kzalloc failed\n");
 		return 0;
 	}
-	strlcpy(temp, rule, strlen(rule)+1);
+	strlcpy(temp, rule, strlen(temp)+1);
 
 	trap_devel_log("SELinux: trap: compare rule '%s' with action [",
 		rule);
