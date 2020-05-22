@@ -1486,7 +1486,7 @@ static struct selinux_trap_list *sel_trap_init_list_entry(char *buf)
 				return NULL;
 			}
 			strlcpy(entry->item_array[type],
-				token, strlen(token)+1);
+				token, strlen(entry->item_array[type])+1);
 			valid_count++;
 		}
 		type++;
