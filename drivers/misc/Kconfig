@@ -642,7 +642,7 @@ config ONESEG_TUNER_SMTVJ19X
 
 config NFC_PN553_DEVICES
 	tristate "Nxp pn553 NCI protocol driver (I2C) devices"
-	default y
+	default n
 	---help---
 	  You'll have to say Y if your computer contains an I2C device that
 	  you want to use under Linux.
