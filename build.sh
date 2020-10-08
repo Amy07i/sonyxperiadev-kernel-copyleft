@@ -18,6 +18,10 @@ make O=./out mrproper
 export KBUILD_DIFFCONFIG=poplar_dsds_diffconfig
 make O=out ARCH=arm64 msmcortex-perf_defconfig
 make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+if [ $? -ne 0 ]; then
+	echo "build failed"
+	exit 1
+fi
 
 # package
 cp ${OUT_DIR}/kernel/out/arch/arm64/boot/Image.gz-dtb ${OUT_DIR}/AnyKernel3
