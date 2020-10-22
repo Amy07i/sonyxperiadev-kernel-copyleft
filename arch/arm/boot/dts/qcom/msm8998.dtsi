@@ -1261,6 +1261,7 @@
 		compatible = "qcom,msm-fastrpc-adsp";
 		qcom,fastrpc-glink;
 		qcom,fastrpc-vmid-heap-shared;
+		qcom,secure-domains = <0x0>;
 
 		qcom,msm_fastrpc_cpz_cb1 {
 			compatible = "qcom,msm-fastrpc-compute-cb";
