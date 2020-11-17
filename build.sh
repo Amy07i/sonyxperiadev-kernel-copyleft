@@ -25,8 +25,10 @@ fi
 
 # package
 cp ${OUT_DIR}/kernel/out/arch/arm64/boot/Image.gz-dtb ${OUT_DIR}/AnyKernel3
+rm -rf ${OUT_DIR}/AnyKernel3/README.md LICENSE
 mkdir -p ${OUT_DIR}/AnyKernel3/modules/vendor/lib/modules/
 cp ${OUT_DIR}/kernel/out/drivers/staging/qcacld-3.0/wlan.ko ${OUT_DIR}/AnyKernel3/modules/vendor/lib/modules/qca_cld3_wlan.ko
 cd ${OUT_DIR}/AnyKernel3
 mkdir -p ${OUT_DIR}/upload
-zip -r ${OUT_DIR}/upload/StockPlusKernel-XZ1-Dual-${COMPILE_DATE}.zip *
+rm -rf ${OUT_DIR}/upload/*
+zip -r ${OUT_DIR}/upload/StockPlusKernel-XZ1-Dual-EAS-PELT-${COMPILE_DATE}.zip *
