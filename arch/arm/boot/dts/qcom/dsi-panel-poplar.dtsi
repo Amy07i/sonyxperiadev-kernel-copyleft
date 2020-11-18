@@ -163,6 +163,11 @@
 
 		somc,mdss-dsi-disp-on-in-hs = <0>;
 		somc,mdss-dsi-wait-time-before-post-on-cmd = <0>;
+
+		qcom,ulps-enabled;
+		qcom,panel-allow-phy-poweroff;
+		qcom,partial-update-enabled = "single_roi";
+		qcom,panel-roi-alignment = <1080 8 1080 8 1080 8>;
 	};
 
 	/* Sharp ID9 */
@@ -285,6 +290,11 @@
 		somc,driver-ic-rclk = <14000000>;
 		somc,driver-ic-vtp = <682>;
 		somc,change-fps-rtn-pos = <2 1>;
+
+		qcom,ulps-enabled;
+		qcom,panel-allow-phy-poweroff;
+		qcom,partial-update-enabled = "single_roi";
+		qcom,panel-roi-alignment = <1080 8 1080 8 1080 8>;
 	};
 
 	/* Default */
@@ -411,5 +421,10 @@
 
 		somc,mdss-dsi-disp-on-in-hs = <0>;
 		somc,mdss-dsi-wait-time-before-post-on-cmd = <0>;
+
+		qcom,ulps-enabled;
+		qcom,panel-allow-phy-poweroff;
+		qcom,partial-update-enabled = "single_roi";
+		qcom,panel-roi-alignment = <1080 8 1080 8 1080 8>;
 	};
 };
