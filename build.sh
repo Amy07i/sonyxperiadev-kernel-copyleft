@@ -19,8 +19,8 @@ export KBUILD_DIFFCONFIG=poplar_dsds_diffconfig
 make O=out ARCH=arm64 msmcortex-perf_defconfig
 make -j${KJOBS} O=out ARCH=arm64 CROSS_COMPILE=aarch64-linux-android-
 if [ $? -ne 0 ]; then
-		echo "build failed"
-			exit 1
+	echo "build failed"
+	exit 1
 fi
 
 # package
