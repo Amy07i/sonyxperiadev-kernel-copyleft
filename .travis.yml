@@ -1,0 +1,21 @@
+language: cpp
+os: linux
+dist: bionic
+cache: ccache
+git:
+  depth: 1
+  script:
+    - cd ${HOME}
+    - git clone -b my-bluhide/47.2.A.11.228 https://github.com/Amy07i/sonyxperiadev-kernel-copyleft.git kernel --depth=1
+    - cd kernel
+    - sudo chmod +x build.sh
+    - travis_wait 50 bash build.sh
+deploy:
+  provider: releases
+  api_key: "${Travis_Token}"
+  file_glob: true
+  file: "${HOME}/upload/*"
+  skip_cleanup: true
+  on:
+    tags: true
+    draft: false
