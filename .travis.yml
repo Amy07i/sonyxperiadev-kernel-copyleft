@@ -6,7 +6,7 @@ git:
   depth: 1
 script:
   - cd ${HOME}
-  - git clone -b msm-4.4 https://github.com/Amy07i/sonyxperiadev-kernel-copyleft.git kernel --depth=1
+  - git clone -b pure https://github.com/Amy07i/sonyxperiadev-kernel-copyleft.git kernel --depth=1
   - cd kernel
   - sudo chmod +x build.sh
   - travis_wait 50 bash build.sh
