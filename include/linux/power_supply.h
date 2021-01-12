@@ -287,6 +287,7 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_MONOTONIC_SOC,
 	POWER_SUPPLY_PROP_LEGACY_CABLE_STATUS,
 	POWER_SUPPLY_PROP_RUNNING_STATUS,
+	POWER_SUPPLY_PROP_FG_RESET_CLOCK,
 	/* Local extensions of type int64_t */
 	POWER_SUPPLY_PROP_CHARGE_COUNTER_EXT,
 	/* Properties of type `const char *' */
