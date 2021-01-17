@@ -572,29 +572,6 @@ afunc_bind(struct usb_configuration *cfg, struct usb_function *fn)
 	uac2->as_in_alt = 0;
 
 	/* Calculate wMaxPacketSize according to audio bandwidth */
-	set_ep_max_packet_size(uac2_opts, &fs_epin_desc, 1000, true);
-	set_ep_max_packet_size(uac2_opts, &fs_epout_desc, 1000, false);
-	set_ep_max_packet_size(uac2_opts, &hs_epin_desc, 8000, true);
-	set_ep_max_packet_size(uac2_opts, &hs_epout_desc, 8000, false);
-
-	agdev->out_ep = usb_ep_autoconfig(gadget, &fs_epout_desc);
-	if (!agdev->out_ep) {
-		dev_err(dev, "%s:%d Error!\n", __func__, __LINE__);
-		return -ENODEV;
-	}
-
-	agdev->in_ep = usb_ep_autoconfig(gadget, &fs_epin_desc);
-	if (!agdev->in_ep) {
-		dev_err(dev, "%s:%d Error!\n", __func__, __LINE__);
-		return -ENODEV;
-	}
-
-	agdev->in_ep_maxpsize = max(fs_epin_desc.wMaxPacketSize,
-					hs_epin_desc.wMaxPacketSize);
-	agdev->out_ep_maxpsize = max(fs_epout_desc.wMaxPacketSize,
-					hs_epout_desc.wMaxPacketSize);
-
-	/* Calculate wMaxPacketSize according to audio bandwidth */
 	ret = set_ep_max_packet_size(uac2_opts, &fs_epin_desc, USB_SPEED_FULL,
 				     true);
 	if (ret < 0) {
@@ -622,6 +599,23 @@ afunc_bind(struct usb_configuration *cfg, struct usb_function *fn)
 		dev_err(dev, "%s:%d Error!\n", __func__, __LINE__);
 		return ret;
 	}
+
+	agdev->out_ep = usb_ep_autoconfig(gadget, &fs_epout_desc);
+	if (!agdev->out_ep) {
+		dev_err(dev, "%s:%d Error!\n", __func__, __LINE__);
+		return -ENODEV;
+	}
+
+	agdev->in_ep = usb_ep_autoconfig(gadget, &fs_epin_desc);
+	if (!agdev->in_ep) {
+		dev_err(dev, "%s:%d Error!\n", __func__, __LINE__);
+		return -ENODEV;
+	}
+
+	agdev->in_ep_maxpsize = max(fs_epin_desc.wMaxPacketSize,
+			hs_epin_desc.wMaxPacketSize);
+	agdev->out_ep_maxpsize = max(fs_epout_desc.wMaxPacketSize,
+			hs_epout_desc.wMaxPacketSize);
 
 	hs_epout_desc.bEndpointAddress = fs_epout_desc.bEndpointAddress;
 	hs_epin_desc.bEndpointAddress = fs_epin_desc.bEndpointAddress;
