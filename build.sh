@@ -8,7 +8,7 @@ COMPILE_DATE=$(date +"%Y%m%d")
 
 # clone Clang and Anykernl3
 git clone https://github.com/kdrag0n/proton-clang.git ${OUT_DIR}/clang --depth=1
-git clone https://github.com/Amy07i/AnyKernel3 ${OUT_DIR}/AnyKernel3 --depth=1
+git clone https://github.com/Amy07i/AnyKernel3 ${OUT_DIR}/AnyKernel3
 
 # Compile
 export PATH="${OUT_DIR}/clang/bin:${OUT_DIR}/clang/aarch64-linux-gnu/bin/:${OUT_DIR}/clang/arm-linux-gnueabi/bin:$PATH"
@@ -21,7 +21,7 @@ make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-obj
 
 # package
 cd ${OUT_DIR}/AnyKernel3
-git reset --hard 0e26e385631a1afdfdf49d75b251d39a5a5d0b30
+git revert 24d942c31e03085f355e4d1cecd75508046914ce
 cp ${OUT_DIR}/kernel/out/arch/arm64/boot/Image.gz-dtb ${OUT_DIR}/AnyKernel3
 mkdir -p ${OUT_DIR}/AnyKernel3/modules/vendor/lib/modules/
 cp ${OUT_DIR}/kernel/out/drivers/staging/qcacld-3.0/wlan.ko ${OUT_DIR}/AnyKernel3/modules/vendor/lib/modules/qca_cld3_wlan.ko
