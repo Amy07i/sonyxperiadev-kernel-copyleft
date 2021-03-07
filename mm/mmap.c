@@ -290,6 +290,8 @@ void unlink_file_vma(struct vm_area_struct *vma)
 
 static void __free_vma(struct vm_area_struct *vma)
 {
+	if (vma == vma->vm_mm->stack_vma)
+		vma->vm_mm->stack_vma = NULL;
 	if (vma->vm_file)
 		fput(vma->vm_file);
 	mpol_put(vma_policy(vma));
