@@ -21,7 +21,6 @@ make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-obj
 
 # package
 cd ${OUT_DIR}/AnyKernel3
-git reset --hard 0e26e385631a1afdfdf49d75b251d39a5a5d0b30
 cp ${OUT_DIR}/kernel/out/arch/arm64/boot/Image.gz-dtb ${OUT_DIR}/AnyKernel3
 mkdir -p ${OUT_DIR}/AnyKernel3/modules/vendor/lib/modules/
 cp ${OUT_DIR}/kernel/out/drivers/input/misc/bu520x1nvx.ko ${OUT_DIR}/AnyKernel3/modules/vendor/lib/modules/bu520x1nvx.ko
