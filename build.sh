@@ -32,4 +32,4 @@ cp ${OUT_DIR}/kernel/out/drivers/misc/sim_detect.ko ${OUT_DIR}/AnyKernel3/module
 
 mkdir -p ${OUT_DIR}/upload
 rm -rf ${OUT_DIR}/upload/*
-zip -r ${OUT_DIR}/upload/PureKernel-XZ1-Dual-${COMPILE_DATE}.zip *
+zip -r ${OUT_DIR}/upload/PureKernel-XZ1-Dual-EAS-${COMPILE_DATE}.zip *
