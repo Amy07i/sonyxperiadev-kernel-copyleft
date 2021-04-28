@@ -5,19 +5,25 @@ export KJOBS="$((`grep -c '^processor' /proc/cpuinfo` * 2))"
 
 OUT_DIR=${HOME}
 COMPILE_DATE=$(date +"%Y%m%d")
+CLANG_URL="https://github.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-7284624.git"
+GCC_URL="https://github.com/arter97/arm64-gcc.git"
+GCC32_URL="https://github.com/arter97/arm32-gcc.git"
+DEFCONFIG=poplar_dsds_diffconfig
 
 # clone Clang and Anykernl3
-git clone https://github.com/kdrag0n/proton-clang.git ${OUT_DIR}/clang --depth=1
+git clone ${CLANG_URL} ${OUT_DIR}/clang --depth=1
+git clone ${GCC_URL} ${OUT_DIR}/gcc --depth=1
+git clone ${GCC32_URL} ${OUT_DIR}/gcc32 --depth=1
 git clone https://github.com/Amy07i/AnyKernel3 ${OUT_DIR}/AnyKernel3 --depth=1
 
 # Compile
-export PATH="${OUT_DIR}/clang/bin:${OUT_DIR}/clang/aarch64-linux-gnu/bin/:${OUT_DIR}/clang/arm-linux-gnueabi/bin:$PATH"
+export PATH="${OUT_DIR}/clang/bin:${OUT_DIR}/gcc/bin/:${OUT_DIR}/gcc32/bin:$PATH"
 cd ${OUT_DIR}/kernel
 make O=./out clean
 make O=./out mrproper
-export KBUILD_DIFFCONFIG=poplar_dsds_diffconfig
+export KBUILD_DIFFCONFIG=${DEFCONFIG}
 make O=out ARCH=arm64 msmcortex-perf_defconfig
-make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-elf- CROSS_COMPILE_ARM32=arm-eabi-
 
 # package
 cd ${OUT_DIR}/AnyKernel3
