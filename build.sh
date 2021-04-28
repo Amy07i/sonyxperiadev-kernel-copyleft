@@ -16,8 +16,8 @@ DEFCONFIG=poplar_dsds_diffconfig
 git clone ${CLANG_URL} ${OUT_DIR}/clang --depth=1
 wget ${GCC_URL} -P ${OUT_DIR}
 wget ${GCC32_URL} -P ${OUT_DIR}
-tar Jxvf ${OUT_DIR}/*gnu.tar*
-tar Jxvf ${OUT_DIR}/*gnueabihf.tar*
+tar Jxvf ${OUT_DIR}/*gnu.tar* -C ${OUT_DIR}/
+tar Jxvf ${OUT_DIR}/*gnueabihf.tar* -C ${OUT_DIR}/
 git clone https://github.com/Amy07i/AnyKernel3 ${OUT_DIR}/AnyKernel3 --depth=1
 
 # Compile
