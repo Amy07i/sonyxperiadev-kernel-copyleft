@@ -6,24 +6,28 @@ export KJOBS="$((`grep -c '^processor' /proc/cpuinfo` * 2))"
 OUT_DIR=${HOME}
 COMPILE_DATE=$(date +"%Y%m%d")
 CLANG_URL="https://github.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-7284624.git"
-GCC_URL="https://github.com/arter97/arm64-gcc.git"
-GCC32_URL="https://github.com/arter97/arm32-gcc.git"
+GCC_URL="https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu.tar.xz?revision=972019b5-912f-4ae6-864a-f61f570e2e7e&la=en&hash=B8618949E6095C87E4C9FFA1648CAA67D4997D88"
+GCC="gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu"
+GCC32_URL="https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf.tar.xz?revision=d0b90559-3960-4e4b-9297-7ddbc3e52783&la=en&hash=985078B758BC782BC338DB947347107FBCF8EF6B"
+GCC32="gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf"
 DEFCONFIG=poplar_dsds_diffconfig
 
 # clone Clang and Anykernl3
 git clone ${CLANG_URL} ${OUT_DIR}/clang --depth=1
-git clone ${GCC_URL} ${OUT_DIR}/gcc --depth=1
-git clone ${GCC32_URL} ${OUT_DIR}/gcc32 --depth=1
+wget ${GCC_URL} -P ${OUT_DIR}
+wget ${GCC32_URL} -P ${OUT_DIR}
+tar Jxvf ${OUT_DIR}/*gnu.tar*
+tar Jxvf ${OUT_DIR}/*gnueabihf.tar*
 git clone https://github.com/Amy07i/AnyKernel3 ${OUT_DIR}/AnyKernel3 --depth=1
 
 # Compile
-export PATH="${OUT_DIR}/clang/bin:${OUT_DIR}/gcc/bin/:${OUT_DIR}/gcc32/bin:$PATH"
+export PATH="${OUT_DIR}/clang/bin:${OUT_DIR}/${GCC}/bin/:${OUT_DIR}/${GCC32}/bin:$PATH"
 cd ${OUT_DIR}/kernel
 make O=./out clean
 make O=./out mrproper
 export KBUILD_DIFFCONFIG=${DEFCONFIG}
 make O=out ARCH=arm64 msmcortex-perf_defconfig
-make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-elf- CROSS_COMPILE_ARM32=arm-eabi-
+make -j${KJOBS} O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-none-linux-gnu- CROSS_COMPILE_ARM32=arm-none-linux-gnueabihf-
 
 # package
 cd ${OUT_DIR}/AnyKernel3
