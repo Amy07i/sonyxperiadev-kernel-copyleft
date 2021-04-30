@@ -11,6 +11,7 @@ GCC="gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu"
 GCC32_URL="https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf.tar.xz?revision=d0b90559-3960-4e4b-9297-7ddbc3e52783&la=en&hash=985078B758BC782BC338DB947347107FBCF8EF6B"
 GCC32="gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf"
 DEFCONFIG=poplar_dsds_diffconfig
+LOCAL_VERSION="r1.0"
 
 # clone Clang and Anykernl3
 git clone ${CLANG_URL} ${OUT_DIR}/clang --depth=1
@@ -21,6 +22,7 @@ tar Jxvf ${OUT_DIR}/*gnueabihf.tar* -C ${OUT_DIR}/
 git clone https://github.com/Amy07i/AnyKernel3 ${OUT_DIR}/AnyKernel3 --depth=1
 
 # Compile
+export LOCALVERSION="-${LOCAL_VERSION}"
 export PATH="${OUT_DIR}/clang/bin:${OUT_DIR}/${GCC}/bin/:${OUT_DIR}/${GCC32}/bin:$PATH"
 cd ${OUT_DIR}/kernel
 make O=./out clean
@@ -42,4 +44,4 @@ cp ${OUT_DIR}/kernel/out/drivers/misc/sim_detect.ko ${OUT_DIR}/AnyKernel3/module
 
 mkdir -p ${OUT_DIR}/upload
 rm -rf ${OUT_DIR}/upload/*
-zip -r ${OUT_DIR}/upload/PureKernel-XZ1-Dual-EAS-${COMPILE_DATE}.zip *
+zip -r ${OUT_DIR}/upload/PureKernel-XZ1-Dual-EAS-${LOCAL_VERSION}-${COMPILE_DATE}.zip *
