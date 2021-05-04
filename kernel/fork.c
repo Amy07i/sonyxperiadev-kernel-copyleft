@@ -86,7 +86,9 @@
 #include <linux/kcov.h>
 #include <linux/cpufreq_times.h>
 #include <linux/devfreq_boost.h>
+#ifdef CONFIG_CPU_INPUT_BOOST
 #include <linux/cpu_input_boost.h>
+#endif
 
 #include <asm/pgtable.h>
 #include <asm/pgalloc.h>
@@ -1795,8 +1797,10 @@ long _do_fork(unsigned long clone_flags,
 
 	/* Boost DDR bus to the max for ${cib_max_boost_duration} ms when userspace launches an app */
 	if (task_is_zygote(current)) {
+	#ifdef CONFIG_CPU_INPUT_BOOST
 		cpu_input_boost_kick_max(cib_max_boost_duration);
-		devfreq_boost_kick_max(DEVFREQ_MSM_CPUBW, cib_max_boost_duration);
+	#endif
+		devfreq_boost_kick_max(DEVFREQ_MSM_CPUBW, 50);
 	}
 
 	/*
