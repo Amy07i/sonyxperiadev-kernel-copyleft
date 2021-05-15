@@ -32,7 +32,7 @@ unsigned long boosted_cpu_util(int cpu);
 static unsigned int default_efficient_freq_lp[] = {1824000};
 static unsigned int default_up_delay_lp[] = {2000};
 
-static unsigned int default_efficient_freq_hp[] = {2323200};
+static unsigned int default_efficient_freq_hp[] = {2112000};
 static unsigned int default_up_delay_hp[] = {2000};
 
 struct sugov_tunables {
