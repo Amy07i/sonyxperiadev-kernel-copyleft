@@ -11,7 +11,7 @@ GCC="gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu"
 GCC32_URL="https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf.tar.xz?revision=d0b90559-3960-4e4b-9297-7ddbc3e52783&la=en&hash=985078B758BC782BC338DB947347107FBCF8EF6B"
 GCC32="gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf"
 DEFCONFIG=poplar_dsds_diffconfig
-LOCAL_VERSION="r3.1"
+LOCAL_VERSION="r3.2"
 
 # clone Clang and Anykernl3
 git clone ${CLANG_URL} ${OUT_DIR}/clang --depth=1
