@@ -296,8 +296,8 @@ BIT_DEF(CALIBRATION_STATE_CALIBRATION_CRC,		0x02, 1);
 	FUNC(&this->pdev->dev, "(%s:%d) " X,		\
 		__func__, __LINE__, ## __VA_ARGS__)
 #define LOGD(this, X, ...) LOGx(dev_dbg, this, X, ## __VA_ARGS__)
-#define LOGI(this, X, ...) LOGx(dev_info, this, X, ## __VA_ARGS__)
-#define LOGW(this, X, ...) LOGx(dev_warn, this, X, ## __VA_ARGS__)
+#define LOGI(this, X, ...) LOGx(dev_dbg, this, X, ## __VA_ARGS__)
+#define LOGW(this, X, ...) LOGx(dev_dbg, this, X, ## __VA_ARGS__)
 #define LOGE(this, X, ...) LOGx(dev_err, this, X, ## __VA_ARGS__)
 #define DEBUG_FLAG(this, NAME) ({					\
 	bool debug_flag = false;					\
